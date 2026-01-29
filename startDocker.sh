@@ -9,3 +9,5 @@ docker compose exec localstack bash
 cd /localstack_config
 chmod 750 *.sh
 ./setupAwsLocal.sh
+
+exit

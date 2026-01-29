@@ -16,5 +16,5 @@ services:
       - RDS_CLUSTER_ENDPOINT_HOST_ONLY=1
     volumes:
       - "./localstack-volume:/var/lib/localstack"
-      - "./localstack_config:/localstack_config"
+      - "./terraform:/terraform"
       - "/var/run/docker.sock:/var/run/docker.sock"

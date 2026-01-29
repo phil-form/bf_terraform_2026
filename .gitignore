@@ -1,2 +1,6 @@
 localstack-volume/*
 .idea/*
+.terraform/*
+**/.terraform/**
+.terraform.lock.hcl
+*.tfstate
