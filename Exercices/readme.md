@@ -105,3 +105,7 @@ En partant de l'exo 2, configurer un environment capable de travailler avec des 
     - Private Subnets : SSH, SFTP, SQL Server
 - **Modules indépendants** pour favoriser la réutilisation et la maintenabilité
 - **Workspaces Terraform** permettent de séparer clairement les environnements sans dupliquer le code
+
+## Bonus
+
+- **Load balancer** : Ajouter un load balancer en entrée pour dispatch les requêtes entre les 4 serveurs https public.
