@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   localstack:
-    container_name: "localstack-main"
+    container_name: "localstack-main-bf-26"
     image: localstack/localstack
     ports:
       - "127.0.0.1:4566:4566"            # LocalStack Gateway
@@ -16,5 +16,5 @@ services:
       - RDS_CLUSTER_ENDPOINT_HOST_ONLY=1
     volumes:
       - "./localstack-volume:/var/lib/localstack"
-      - "./terraform:/terraform"
+      - "./localstack_config:/localstack_config"
       - "/var/run/docker.sock:/var/run/docker.sock"
