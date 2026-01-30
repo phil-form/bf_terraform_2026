@@ -1,15 +1,72 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "6.17.0"
+resource "aws_vpc" "this" {
+  cidr_block = var.cidr_block
+  enable_dns_support = true
+  enable_dns_hostnames = true
+
+  tags = merge({ Name = "${var.env}-vpc" }, var.tags)
+}
+
+# Ajout d'une internet gateway
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.this.id
+
+  tags = merge({ Name = "${var.env}-igw" }, var.tags)
+}
+
+# Ajoute internet au sous-réseau public
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.this.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
+
+  tags = {
+    Name = "public-rt"
+  }
+}
+
+resource "aws_route_table_association" "public" {
+  count = length(var.public_subnets)
+  subnet_id = aws_subnet.public_subnets[count.index].id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_eip" "nat" {
+  domain = "vpc"
+}
+
+resource "aws_nat_gateway" "nat" {
+  subnet_id = aws_subnet.public_subnets[0].id
+  allocation_id = aws_eip.nat.id
+
+  # Ici j'oblige d'avoir au moins un reseau public dans la configuration
+  lifecycle {
+    precondition {
+      condition = length(var.public_subnets) > 0
+      error_message = "You must have a public network to enable NAT gateway to a private network !"
     }
   }
 }
-resource "aws_vpc" "this" {
-  cidr_block = var.cidr_block
 
-  tags = merge({ Name = "${var.env}-vpc" }, var.tags)
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.this.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.nat.id
+  }
+
+  tags = {
+    Name = "public-rt"
+  }
+}
+
+resource "aws_route_table_association" "private" {
+  count = length(var.private_subnets)
+  subnet_id = aws_subnet.private_subnets[count.index].id
+  route_table_id = aws_route_table.private.id
 }
 
 resource "aws_security_group" "sg_ssh" {
