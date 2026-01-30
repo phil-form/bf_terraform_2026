@@ -17,3 +17,8 @@ En repartant de l'exercice précédent, ajouter une  gestion de réseaux.
 Faites trois réseaux distinct :
 - public 3 sous réseaux (port ouvert 22, 80, 8080, 443) 
 - privé 2 sous réseaux (port ouvert 22, 5432)
+
+# Exercice 03
+
+En partant de l'exo 2, configurer un environment capable de travailler avec des variables différentes entre le dev, le stagging et la prod
+
