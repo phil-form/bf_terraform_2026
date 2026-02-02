@@ -109,3 +109,19 @@ En partant de l'exo 2, configurer un environment capable de travailler avec des 
 ## Bonus
 
 - **Load balancer** : Ajouter un load balancer en entrée pour dispatch les requêtes entre les 4 serveurs https public.
+
+# Exercice 05 
+
+En partant de l'exercice précédent, déployez les serveurs suivant : 
+- apache en cloud-init 
+- ngnix en bash (provisioner remote-exec)
+- copier le contenu du dossier "projet_exemple" et déployez celui-ci via cloud-init
+- avec le local-exec créer un fichiers comprenant toutes les ips des machines cibles
+- Déployez les services suivants sur chaque machine via un docker compose : 
+
+```terminaloutput
+Service ngnix
+Service postgresql
+Service pgadmin4
+Service kafka
+```
