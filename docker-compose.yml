@@ -11,7 +11,7 @@ services:
       # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
 #      - DEBUG=${DEBUG:-0}
       - DEBUG=1
-#      - LOCALSTACK_AUTH_TOKEN="AUTH_TOKEN"
+      - LOCALSTACK_AUTH_TOKEN="ls-NamabErE-6961-weRo-Cubi-hOcENATi6219"
       - PERSISTENCE=1
       - RDS_CLUSTER_ENDPOINT_HOST_ONLY=1
     volumes:
