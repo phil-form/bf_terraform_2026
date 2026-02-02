@@ -1,0 +1,8 @@
+#cloud-config
+package_update: true
+packages:
+  - apache2
+runcmd:
+  - systemctl start apache2
+  - systemctl enable apache2
+  - echo "<h1>Welcome to Terraform Demo Application</h1>" | tee /var/www/html/index.html

@@ -1,0 +1,5 @@
+54.214.59.145, ec2-54-214-59-145.compute-1.amazonaws.com
+54.214.39.22, ec2-54-214-39-22.compute-1.amazonaws.com
+54.214.233.29, ec2-54-214-233-29.compute-1.amazonaws.com
+54.214.167.240, ec2-54-214-167-240.compute-1.amazonaws.com
+54.214.92.238, ec2-54-214-92-238.compute-1.amazonaws.com
