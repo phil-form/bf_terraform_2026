@@ -1,0 +1,1 @@
+output "db_ids" { value = aws_db_instance.this[*].id }
