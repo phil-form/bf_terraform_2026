@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_PASSWORD: example12343
+    networks:
+      - pg-network
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - pg-network
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+  kafka:
+    image: bitnami/kafka
+    environment:
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+
+  zookeeper:
+    image: bitnami/zookeeper
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+
+networks:
+  pg-network:
+
+volumes:
+  pg-data:
+  pgadmin-data:

@@ -1,0 +1,18 @@
+#cloud-init
+
+packages:
+  - docker
+  - docker-compose
+
+write_files:
+  - path: /opt/projet/docker-compose.yml
+    encoding: b64
+    content: |
+      ${compose}
+
+runcmd:
+  - systemctl enable docker
+  - systemctl start docker
+  - usermod -aG docker ec2-user
+  - cd /opt/projet/docker-compose.yml
+  - docker compose up -d

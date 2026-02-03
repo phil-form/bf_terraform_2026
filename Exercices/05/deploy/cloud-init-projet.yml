@@ -1,0 +1,12 @@
+#cloud-init
+
+packages:
+  - docker
+  - docker-compose
+
+runcmd:
+  - systemctl enable docker
+  - systemctl start docker
+  - usermod -aG docker ec2-user
+  - tar -xzf /opt/projet.tar.gz -C /opt/projet/app
+  - cd /opt/projet/app/projet_exemple && docker compose up -d
